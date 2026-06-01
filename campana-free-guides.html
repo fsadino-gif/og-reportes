@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Campaña Free Guides — Reporte</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@400;500&family=Sora:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #0b0e13;
+    --surface: #13171f;
+    --surface2: #1a1f2b;
+    --border: rgba(255,255,255,0.07);
+    --border2: rgba(255,255,255,0.13);
+    --text: #e8eaf0;
+    --muted: #6b7585;
+    --accent: #00d4a0;
+    --accent2: #00a87e;
+    --accent-dim: rgba(0,212,160,0.1);
+    --warn: #f59e0b;
+    --danger: #ef4444;
+    --blue: #60a5fa;
+    --serif: 'DM Serif Display', Georgia, serif;
+    --sans: 'Sora', sans-serif;
+    --mono: 'DM Mono', monospace;
+  }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--sans);
+    font-size: 15px;
+    line-height: 1.6;
+    min-height: 100vh;
+  }
+
+  /* ─── header ─── */
+  header {
+    border-bottom: 0.5px solid var(--border);
+    padding: 2.5rem 3rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  .brand-dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: var(--accent);
+    box-shadow: 0 0 8px var(--accent);
+  }
+
+  h1 {
+    font-family: var(--serif);
+    font-size: 2.8rem;
+    font-weight: 400;
+    line-height: 1.1;
+    color: var(--text);
+    margin-top: 0.25rem;
+  }
+
+  h1 em {
+    color: var(--accent);
+    font-style: italic;
+  }
+
+  .meta {
+    font-size: 12px;
+    color: var(--muted);
+    font-family: var(--mono);
+    line-height: 1.8;
+    text-align: right;
+  }
+
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 11px;
+    font-family: var(--mono);
+    background: var(--accent-dim);
+    color: var(--accent);
+    border: 0.5px solid rgba(0,212,160,0.25);
+    padding: 3px 10px;
+    border-radius: 100px;
+    margin-top: 0.4rem;
+  }
+
+  /* ─── main grid ─── */
+  main {
+    padding: 2.5rem 3rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2.5rem;
+    max-width: 1280px;
+  }
+
+  /* ─── section label ─── */
+  .section-label {
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--muted);
+    font-family: var(--mono);
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .section-label::after {
+    content: '';
+    flex: 1;
+    height: 0.5px;
+    background: var(--border);
+  }
+
+  /* ─── big stat cards ─── */
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 12px;
+  }
+
+  .stat-card {
+    background: var(--surface);
+    border: 0.5px solid var(--border);
+    border-radius: 14px;
+    padding: 1.25rem 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    transition: border-color 0.2s;
+  }
+  .stat-card:hover { border-color: var(--border2); }
+
+  .stat-label {
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 0.04em;
+    font-family: var(--mono);
+  }
+
+  .stat-value {
+    font-family: var(--serif);
+    font-size: 2.2rem;
+    color: var(--text);
+    line-height: 1;
+  }
+
+  .stat-value.accent { color: var(--accent); }
+  .stat-value.blue { color: var(--blue); }
+  .stat-value.warn { color: var(--warn); }
+
+  .stat-sub {
+    font-size: 12px;
+    color: var(--muted);
+    font-family: var(--mono);
+  }
+
+  /* ─── engagement table ─── */
+  .table-wrap {
+    background: var(--surface);
+    border: 0.5px solid var(--border);
+    border-radius: 14px;
+    overflow: hidden;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+  }
+
+  thead th {
+    padding: 0.8rem 1.2rem;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    font-family: var(--mono);
+    font-weight: 400;
+    text-align: left;
+    border-bottom: 0.5px solid var(--border);
+    white-space: nowrap;
+  }
+
+  tbody td {
+    padding: 0.85rem 1.2rem;
+    border-bottom: 0.5px solid var(--border);
+    color: var(--text);
+  }
+
+  tbody tr:last-child td { border-bottom: none; }
+
+  tbody tr:hover { background: rgba(255,255,255,0.025); }
+
+  .pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-family: var(--mono);
+    font-size: 12px;
+    padding: 2px 9px;
+    border-radius: 100px;
+    font-weight: 500;
+  }
+  .pill.good { background: rgba(0,212,160,0.12); color: var(--accent); }
+  .pill.warn { background: rgba(245,158,11,0.12); color: var(--warn); }
+  .pill.muted { background: var(--surface2); color: var(--muted); }
+  .pill.blue { background: rgba(96,165,250,0.12); color: var(--blue); }
+
+  /* ─── chart ─── */
+  .chart-wrap {
+    background: var(--surface);
+    border: 0.5px solid var(--border);
+    border-radius: 14px;
+    padding: 1.5rem;
+  }
+
+  .chart-legend {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 1.2rem;
+    flex-wrap: wrap;
+  }
+
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    font-size: 12px;
+    color: var(--muted);
+    font-family: var(--mono);
+  }
+
+  .legend-dot {
+    width: 10px; height: 10px;
+    border-radius: 2px;
+  }
+
+  /* ─── messages table ─── */
+  .msg-link {
+    color: var(--blue);
+    text-decoration: none;
+    font-size: 13px;
+  }
+  .msg-link:hover { text-decoration: underline; }
+
+  .channel-badge {
+    display: inline-block;
+    font-size: 10px;
+    font-family: var(--mono);
+    padding: 2px 8px;
+    border-radius: 100px;
+    border: 0.5px solid var(--border2);
+    color: var(--muted);
+  }
+
+  /* ─── footer ─── */
+  footer {
+    padding: 2rem 3rem;
+    border-top: 0.5px solid var(--border);
+    font-size: 11px;
+    color: var(--muted);
+    font-family: var(--mono);
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  @media (max-width: 680px) {
+    header, main, footer { padding-left: 1.25rem; padding-right: 1.25rem; }
+    h1 { font-size: 2rem; }
+    .meta { text-align: left; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div>
+    <div class="brand">
+      <div class="brand-dot"></div>
+      Omnisend · Automation Report
+    </div>
+    <h1>Campaña <em>Free Guides</em></h1>
+    <div class="badge">
+      <svg width="7" height="7" viewBox="0 0 7 7"><circle cx="3.5" cy="3.5" r="3.5" fill="currentColor"/></svg>
+      Trigger: Entered segment
+    </div>
+  </div>
+  <div class="meta">
+    Habilitado: Thu, May 21, 2026 — 6:56 PM<br>
+    Editado: Thu, May 21, 2026 — 6:56 PM<br>
+    Creado: Thu, May 21, 2026 — 6:52 PM<br>
+    <span style="color:#3a4050;">ID: 6a0f8cca25b6ef543c6b0735</span>
+  </div>
+</header>
+
+<main>
+
+  <!-- Sales -->
+  <section>
+    <p class="section-label">Ventas · Últimos 30 días</p>
+    <div class="stats-grid">
+      <div class="stat-card">
+        <span class="stat-label">Revenue</span>
+        <span class="stat-value">$0.00</span>
+        <span class="stat-sub">Sin conversiones</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-label">Placed orders</span>
+        <span class="stat-value blue">0</span>
+        <span class="stat-sub">Órdenes colocadas</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-label">Revenue / order</span>
+        <span class="stat-value">$0.00</span>
+        <span class="stat-sub">Por orden colocada</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-label">Revenue / msg sent</span>
+        <span class="stat-value">$0.00</span>
+        <span class="stat-sub">Por mensaje enviado</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Engagement -->
+  <section>
+    <p class="section-label">Engagement &amp; deliverability</p>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Msgs sent</th>
+            <th>Open rate</th>
+            <th>Click rate</th>
+            <th>Order rate</th>
+            <th>Failed delivery</th>
+            <th>Spam rate</th>
+            <th>Unsub rate</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong style="font-family:var(--mono);font-size:15px;">304</strong></td>
+            <td><span class="pill good">24% <small>(73)</small></span></td>
+            <td><span class="pill blue">4.9% <small>(15)</small></span></td>
+            <td><span class="pill muted">0% (0)</span></td>
+            <td><span class="pill warn">4.2% <small>(13)</small></span></td>
+            <td><span class="pill muted">0% (0)</span></td>
+            <td><span class="pill muted">0.32% (1)</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- Channel performance -->
+  <section>
+    <p class="section-label">Channel performance</p>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Canal</th>
+            <th>Msgs sent</th>
+            <th>Open rate</th>
+            <th>Click rate</th>
+            <th>Order rate</th>
+            <th>Revenue</th>
+            <th>Failed delivery</th>
+            <th>Spam</th>
+            <th>Unsub</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="channel-badge">Email</span></td>
+            <td style="font-family:var(--mono);">304</td>
+            <td><span class="pill good">24% (73)</span></td>
+            <td><span class="pill blue">4.9% (15)</span></td>
+            <td><span class="pill muted">0% (0)</span></td>
+            <td style="font-family:var(--mono); color:var(--muted);">$0.00 (0)</td>
+            <td><span class="pill warn">4.2% (13)</span></td>
+            <td><span class="pill muted">0% (0)</span></td>
+            <td><span class="pill muted">0.32% (1)</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- Chart -->
+  <section>
+    <p class="section-label">Channel performance over time · Weekly</p>
+    <div class="chart-wrap">
+      <div class="chart-legend">
+        <div class="legend-item"><span class="legend-dot" style="background:#00d4a0;"></span>Sent</div>
+        <div class="legend-item"><span class="legend-dot" style="background:#60a5fa;"></span>Opened</div>
+        <div class="legend-item"><span class="legend-dot" style="background:#a78bfa;"></span>Clicked</div>
+      </div>
+      <div style="position:relative;width:100%;height:260px;">
+        <canvas id="timeChart" role="img" aria-label="Mensajes enviados, abiertos y clickeados por semana entre Apr 27 y Jun 1 2026">Enviados pico de ~180 en la semana del 25 de mayo. Abiertos y clickeados proporcionales.</canvas>
+      </div>
+    </div>
+  </section>
+
+  <!-- Message performance -->
+  <section>
+    <p class="section-label">Message performance</p>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th style="width:30%;">Mensaje</th>
+            <th>Canal</th>
+            <th>Msgs sent</th>
+            <th>Open rate</th>
+            <th>Click rate</th>
+            <th>Order rate</th>
+            <th>Revenue</th>
+            <th>Failed</th>
+            <th>Spam</th>
+            <th>Unsub</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><a class="msg-link" href="#">Is the pavement too hot for your dog?</a></td>
+            <td><span class="channel-badge">Email</span></td>
+            <td style="font-family:var(--mono);">0</td>
+            <td><span class="pill muted">0%</span></td>
+            <td><span class="pill muted">0%</span></td>
+            <td><span class="pill muted">0%</span></td>
+            <td style="font-family:var(--mono);color:var(--muted);">$0.00</td>
+            <td><span class="pill muted">0%</span></td>
+            <td><span class="pill muted">0%</span></td>
+            <td><span class="pill muted">0%</span></td>
+          </tr>
+          <tr>
+            <td><a class="msg-link" href="#">Final days! 30% OFF</a></td>
+            <td><span class="channel-badge">Email</span></td>
+            <td style="font-family:var(--mono);">186</td>
+            <td><span class="pill good">19.3% (36)</span></td>
+            <td><span class="pill blue">4.3% (8)</span></td>
+            <td><span class="pill muted">0%</span></td>
+            <td style="font-family:var(--mono);color:var(--muted);">$0.00</td>
+            <td><span class="pill warn">3.7% (7)</span></td>
+            <td><span class="pill muted">0%</span></td>
+            <td><span class="pill muted">0%</span></td>
+          </tr>
+          <tr>
+            <td><a class="msg-link" href="#">Enjoy a special 30% discount</a></td>
+            <td><span class="channel-badge">Email</span></td>
+            <td style="font-family:var(--mono);">118</td>
+            <td><span class="pill good">31.3% (37)</span></td>
+            <td><span class="pill blue">5.9% (7)</span></td>
+            <td><span class="pill muted">0%</span></td>
+            <td style="font-family:var(--mono);color:var(--muted);">$0.00</td>
+            <td><span class="pill warn">5% (6)</span></td>
+            <td><span class="pill muted">0%</span></td>
+            <td><span class="pill muted">0.84% (1)</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <span>Workflow ID: 6a0f8cca25b6ef543c6b0735</span>
+  <span>Generado · Jun 2026</span>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<script>
+  const labels = ['Apr 27','May 4','May 11','May 18','May 25','Jun 1'];
+  const sentData = [0, 0, 0, 120, 184, 0];
+  const openData = [0, 0, 0, 29, 44, 0];
+  const clickData = [0, 0, 0, 6, 9, 0];
+
+  new Chart(document.getElementById('timeChart'), {
+    type: 'bar',
+    data: {
+      labels,
+      datasets: [
+        {
+          label: 'Sent',
+          data: sentData,
+          backgroundColor: 'rgba(0,212,160,0.75)',
+          borderRadius: 4,
+          borderSkipped: false,
+        },
+        {
+          label: 'Opened',
+          data: openData,
+          backgroundColor: 'rgba(96,165,250,0.75)',
+          borderRadius: 4,
+          borderSkipped: false,
+        },
+        {
+          label: 'Clicked',
+          data: clickData,
+          backgroundColor: 'rgba(167,139,250,0.75)',
+          borderRadius: 4,
+          borderSkipped: false,
+        }
+      ]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: { display: false },
+        tooltip: {
+          backgroundColor: '#13171f',
+          borderColor: 'rgba(255,255,255,0.1)',
+          borderWidth: 1,
+          titleColor: '#e8eaf0',
+          bodyColor: '#6b7585',
+          padding: 10,
+          callbacks: {
+            label: ctx => ` ${ctx.dataset.label}: ${ctx.parsed.y}`
+          }
+        }
+      },
+      scales: {
+        x: {
+          ticks: { color: '#6b7585', font: { family: "'DM Mono', monospace", size: 11 }, autoSkip: false },
+          grid: { color: 'rgba(255,255,255,0.05)' },
+          border: { color: 'rgba(255,255,255,0.07)' }
+        },
+        y: {
+          ticks: { color: '#6b7585', font: { family: "'DM Mono', monospace", size: 11 } },
+          grid: { color: 'rgba(255,255,255,0.05)' },
+          border: { color: 'rgba(255,255,255,0.07)' },
+          beginAtZero: true
+        }
+      }
+    }
+  });
+</script>
+
+</body>
+</html>
