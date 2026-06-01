@@ -1,1 +1,386 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Comparación de Automatizaciones</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@400;500&family=Sora:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
+  :root {
+    --bg: #0b0e13;
+    --surface: #13171f;
+    --surface2: #1a1f2b;
+    --border: rgba(255,255,255,0.07);
+    --border2: rgba(255,255,255,0.13);
+    --text: #e8eaf0;
+    --muted: #6b7585;
+    --accent: #00d4a0;
+    --accent2: #00a87e;
+    --accent-dim: rgba(0,212,160,0.1);
+    --warn: #f59e0b;
+    --danger: #ef4444;
+    --blue: #60a5fa;
+    --serif: 'DM Serif Display', Georgia, serif;
+    --sans: 'Sora', sans-serif;
+    --mono: 'DM Mono', monospace;
+  }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--sans);
+    font-size: 15px;
+    line-height: 1.6;
+    min-height: 100vh;
+  }
+
+  /* ─── header ─── */
+  header {
+    border-bottom: 0.5px solid var(--border);
+    padding: 2.5rem 3rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  .brand-dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: var(--accent);
+    box-shadow: 0 0 8px var(--accent);
+  }
+
+  h1 {
+    font-family: var(--serif);
+    font-size: 2.8rem;
+    font-weight: 400;
+    line-height: 1.1;
+    color: var(--text);
+    margin-top: 0.25rem;
+  }
+
+  h1 em {
+    color: var(--accent);
+    font-style: italic;
+  }
+
+  /* ─── main grid ─── */
+  main {
+    padding: 2.5rem 3rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2.5rem;
+    max-width: 1280px;
+  }
+
+  /* ─── section label ─── */
+  .section-label {
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--muted);
+    font-family: var(--mono);
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .section-label::after {
+    content: '';
+    flex: 1;
+    height: 0.5px;
+    background: var(--border);
+  }
+
+  .intro-text {
+    font-size: 1.1rem;
+    color: var(--text);
+    max-width: 900px;
+    line-height: 1.7;
+  }
+
+  /* ─── engagement table ─── */
+  .table-wrap {
+    background: var(--surface);
+    border: 0.5px solid var(--border);
+    border-radius: 14px;
+    overflow: hidden;
+    overflow-x: auto;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+  }
+
+  thead th {
+    padding: 1rem 1.2rem;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    font-family: var(--mono);
+    font-weight: 400;
+    text-align: left;
+    border-bottom: 0.5px solid var(--border);
+    white-space: nowrap;
+  }
+
+  tbody td {
+    padding: 1rem 1.2rem;
+    border-bottom: 0.5px solid var(--border);
+    color: var(--text);
+    white-space: nowrap;
+  }
+
+  tbody tr:last-child td { border-bottom: none; }
+  tbody tr:hover { background: rgba(255,255,255,0.025); }
+
+  .pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-family: var(--mono);
+    font-size: 13px;
+    padding: 3px 10px;
+    border-radius: 100px;
+    font-weight: 500;
+  }
+  .pill.good { background: rgba(0,212,160,0.12); color: var(--accent); }
+  .pill.warn { background: rgba(245,158,11,0.12); color: var(--warn); }
+  .pill.muted { background: var(--surface2); color: var(--muted); }
+  .pill.blue { background: rgba(96,165,250,0.12); color: var(--blue); }
+
+  /* ─── Conclusions ─── */
+  .conclusions-wrap {
+    background: var(--surface);
+    border: 0.5px solid var(--border);
+    border-radius: 14px;
+    padding: 2rem;
+  }
+
+  .conclusions-title {
+    font-family: var(--serif);
+    font-size: 1.8rem;
+    margin-bottom: 1.5rem;
+    color: var(--text);
+  }
+
+  ul.conclusions-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+  }
+
+  ul.conclusions-list li {
+    position: relative;
+    padding-left: 1.8rem;
+    color: var(--text);
+    line-height: 1.6;
+  }
+
+  ul.conclusions-list li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.55em;
+    width: 6px;
+    height: 6px;
+    background: var(--accent);
+    border-radius: 50%;
+    box-shadow: 0 0 6px var(--accent);
+  }
+
+  ul.conclusions-list li strong {
+    font-weight: 600;
+    color: #fff;
+  }
+
+  /* ─── Links Section ─── */
+  .links-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1rem;
+    margin-top: 1rem;
+  }
+
+  .report-link {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.2rem 1.5rem;
+    background: var(--surface2);
+    border: 0.5px solid var(--border);
+    border-radius: 10px;
+    text-decoration: none;
+    color: var(--text);
+    font-weight: 500;
+    transition: all 0.2s ease;
+  }
+
+  .report-link:hover {
+    background: var(--surface);
+    border-color: var(--accent);
+    transform: translateY(-2px);
+  }
+
+  .report-link span {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .report-link svg {
+    color: var(--accent);
+    transition: transform 0.2s ease;
+  }
+  
+  .report-link:hover svg {
+    transform: translateX(4px);
+  }
+
+  /* ─── footer ─── */
+  footer {
+    padding: 2rem 3rem;
+    border-top: 0.5px solid var(--border);
+    font-size: 11px;
+    color: var(--muted);
+    font-family: var(--mono);
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  @media (max-width: 680px) {
+    header, main, footer { padding-left: 1.25rem; padding-right: 1.25rem; }
+    h1 { font-size: 2rem; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div>
+    <div class="brand">
+      <div class="brand-dot"></div>
+      Omnisend · Automation Report
+    </div>
+    <h1>Comparación de <em>Automatizaciones</em></h1>
+  </div>
+</header>
+
+<main>
+
+  <!-- Summary text -->
+  <section>
+    <p class="intro-text">
+      Comparé las 2 automatizaciones activas más recientes: <strong>"Campaña Free Guides"</strong> tiene mejor engagement, mientras que <strong>"Campaña Amazon"</strong> tuvo mucho más volumen; ninguna generó revenue atribuido en este período.
+    </p>
+  </section>
+
+  <!-- Comparison Table -->
+  <section>
+    <p class="section-label">Métricas Comparativas</p>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Automatización</th>
+            <th>Enviados</th>
+            <th>Open rate</th>
+            <th>Click rate</th>
+            <th>Órdenes atribuidas</th>
+            <th>Revenue atribuido</th>
+            <th>Unsubscribes</th>
+            <th>Fail rate</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td style="font-weight: 500;">Campaña Free Guides</td>
+            <td style="font-family:var(--mono);">304</td>
+            <td><span class="pill good">24.0% (73)</span></td>
+            <td><span class="pill blue">4.9% (15)</span></td>
+            <td><span class="pill muted">0</span></td>
+            <td style="font-family:var(--mono); color:var(--muted);">$0.00</td>
+            <td><span class="pill muted">0.33% (1)</span></td>
+            <td><span class="pill warn">4.3% (13)</span></td>
+          </tr>
+          <tr>
+            <td style="font-weight: 500;">Campaña Amazon</td>
+            <td style="font-family:var(--mono);">2,438</td>
+            <td><span class="pill good">13.7% (334)</span></td>
+            <td><span class="pill blue">0.82% (20)</span></td>
+            <td><span class="pill muted">0</span></td>
+            <td style="font-family:var(--mono); color:var(--muted);">$0.00</td>
+            <td><span class="pill muted">1.1% (26)</span></td>
+            <td><span class="pill warn">1.1% (28)</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- Conclusions -->
+  <section>
+    <div class="conclusions-wrap">
+      <h2 class="conclusions-title">Conclusiones clave</h2>
+      <ul class="conclusions-list">
+        <li><strong>Free Guides gana en engagement:</strong> +10.3 puntos porcentuales en open rate y +4.1 puntos porcentuales en click rate vs. Amazon.</li>
+        <li><strong>Amazon gana en alcance:</strong> envió 2,134 mensajes más que Free Guides.</li>
+        <li><strong>Revenue:</strong> ambas tuvieron 0 órdenes y $0.00 de revenue atribuido.</li>
+        <li><strong>Deliverability:</strong> Free Guides tiene un fail rate más alto (4.3% vs. 1.1%), conviene revisar contactos inválidos/rebotados o configuración de entrega.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- Links to Detailed Reports -->
+  <section>
+    <p class="section-label">Reportes Detallados</p>
+    <div class="links-grid">
+      <a href="campana-free-guides.html" class="report-link">
+        <span>
+          <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+          Reporte: Campaña Free Guides
+        </span>
+        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+      </a>
+      <a href="campana-amazon-reporte.html" class="report-link">
+        <span>
+          <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+          Reporte: Campaña Amazon
+        </span>
+        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+      </a>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <span>Reporte Comparativo</span>
+  <span>Generado · Jun 2026</span>
+</footer>
+
+</body>
+</html>
